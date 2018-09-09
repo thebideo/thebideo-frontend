@@ -4,8 +4,14 @@ node {
     }
     
     stage('Deploy') {
-        def homedir = '/opt/thebideo-frontend/'
-        sh 'echo $homedir/*'
-        sh 'echo * $homedir'
+        def webdir = '/opt/thebideo-frontend/'
+        def backupdir = '/opt/backup_thebideo-frontend/'
+        echo 'Cleaning up backup dir'
+        sh "rm -rf $backupdir*"
+        echo 'Backing up'
+        sh "mv $webdir/* $backupdir"
+        echo 'Deploying'
+        sh "cp * $webdir"
+        echo 'Done!'
     }
 }
