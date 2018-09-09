@@ -11,7 +11,7 @@ node {
         echo 'Backing up'
         sh "mv $webdir/* $backupdir"
         echo 'Deploying'
-        sh "cp * $webdir"
+        sh "cp -r * $webdir"
         echo 'Done!'
     }
 }
