@@ -1,6 +1,6 @@
 node {
     stage('Checkout') {
-        Checkout scm
+        checkout scm
     }
     
     stage('Say Hi!') {
