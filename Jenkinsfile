@@ -3,7 +3,9 @@ node {
         checkout scm
     }
     
-    stage('Say Hi!') {
-        echo 'Hello from Pipeline'
+    stage('Deploy') {
+        def homedir = '/opt/thebideo-frontend/'
+        sh 'rm -rf $homedir/*'
+        sh 'cp * $homedir'
     }
 }
