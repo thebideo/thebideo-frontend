@@ -5,7 +5,7 @@ node {
     
     stage('Deploy') {
         def homedir = '/opt/thebideo-frontend/'
-        sh 'rm -rf $homedir/*'
-        sh 'cp * $homedir'
+        sh 'echo $homedir/*'
+        sh 'echo * $homedir'
     }
 }
