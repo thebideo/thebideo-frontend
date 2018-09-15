@@ -3,6 +3,11 @@ node {
         checkout scm
     }
     
+    stage('Build') {
+        sh 'bundle exec install'
+        sh 'sass ./_sass/main.scss main.css'
+    }
+
     stage('Deploy') {
         def webdir = '/opt/thebideo-frontend/'
         def backupdir = '/opt/backup_thebideo-frontend/'
