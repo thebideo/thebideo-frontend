@@ -14,7 +14,9 @@ node {
                         '/9fstn3/Bideo23.mp3','/2gkji7/whateverbideo.mp3']
     
         for( item in mp3_URLs ) {
-            sh "wget $base_mp3_url$item"
+            parallel $item: {
+                sh "wget -P ./assets/mp3/ $base_mp3_url$item"
+            }
         }
     }
 
