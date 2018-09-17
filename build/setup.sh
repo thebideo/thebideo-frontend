@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export PATH=$PATH:~/bin
 # Script to setup our environment
 gem list
 if !(`gem list bundler -i`); then
