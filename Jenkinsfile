@@ -5,7 +5,7 @@ node {
     
     stage('Setup') {
         dir('build') {
-            sh -x 'setup.sh'
+            sh -x {'setup.sh'}
         }
     }
 
@@ -32,13 +32,13 @@ node {
 
     stage('Build') {
         dir('build') {
-            sh -x 'build.sh'
+            sh -x {'build.sh'}
         }
     }
 
     stage('Deploy') {
         dir('build') {
-            sh -x 'publish.sh'
+            sh -x {'publish.sh'}
         }
     }
 }
