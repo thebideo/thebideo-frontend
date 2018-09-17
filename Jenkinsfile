@@ -3,6 +3,12 @@ node {
         checkout scm
     }
     
+    stage('Setup') {
+        dir('build') {
+            sh './setup.sh'
+        }
+    }
+
     stage('Download Files') {
         def downloads = [:]
         def base_mp3_url = 'https://bideo.podbean.com/mf/download'
@@ -25,19 +31,14 @@ node {
     }
 
     stage('Build') {
-        sh 'bundle exec install'
-        sh 'bundle exec sass ./_sass/main.scss main.css'
+        dir('build') {
+            sh './build.sh'
+        }
     }
 
     stage('Deploy') {
-        def webdir = '/opt/thebideo-frontend/'
-        def backupdir = '/opt/backup_thebideo-frontend/'
-        echo 'Cleaning up backup dir'
-        sh "rm -rf $backupdir*"
-        echo 'Backing up'
-        sh "mv $webdir/* $backupdir"
-        echo 'Deploying'
-        sh "cp -r * $webdir"
-        echo 'Done!'
+        dir('build') {
+            sh './publish.sh'
+        }
     }
 }
