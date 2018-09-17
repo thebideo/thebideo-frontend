@@ -42,4 +42,10 @@ node {
             sh 'publish.sh'
         }
     }
+
+    post {
+        always {
+            deleteDir()
+        }
+    }
 }
