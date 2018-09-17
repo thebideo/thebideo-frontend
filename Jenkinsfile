@@ -6,7 +6,7 @@ node {
     stage('Setup') {
         dir('build') {
             sh "chmod +x *"
-            sh 'setup.sh'
+            sh './setup.sh'
         }
     }
 
@@ -33,13 +33,13 @@ node {
 
     stage('Build') {
         dir('build') {
-            sh 'build.sh'
+            sh './build.sh'
         }
     }
 
     stage('Deploy') {
         dir('build') {
-            sh 'publish.sh'
+            sh './publish.sh'
         }
     }
 
