@@ -28,7 +28,7 @@ node {
                 }
             }
         }
-        parallel downloads
+        // parallel downloads
     }
 
     stage('Build') {
