@@ -44,8 +44,6 @@ node {
     }
 
     post {
-        always {
-            deleteDir()
-        }
+        deleteDir()
     }
 }
