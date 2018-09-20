@@ -43,7 +43,9 @@ node {
         }
     }
 
-    post {
-        deleteDir()
+    post { 
+        always { 
+            cleanWs()
+        }
     }
 }
