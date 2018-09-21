@@ -2,13 +2,17 @@ pipeline {
     agent any
     stages {
         stage('Checkout') {
-            checkout scm
+            steps {
+                checkout scm
+            }
         }
         
         stage('Setup') {
-            dir('build') {
-                sh "chmod +x *"
-                sh './setup.sh'
+            steps {
+                dir('build') {
+                    sh "chmod +x *"
+                    sh './setup.sh'
+                }
             }
         }
 
