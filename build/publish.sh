@@ -9,5 +9,5 @@ echo 'Backing up'
 mv $WEBDIR/* $BACKUPDIR
 echo 'Deploying'
 cd ..
-cp -r * $WEBDIR
+rsync -av --progress . $WEBDIR --exclude build --exclude build@tmp
 echo 'Done!'
