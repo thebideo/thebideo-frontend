@@ -8,4 +8,7 @@ fi
 
 pushd ..
 bundle install
+pushd assets
+cp -r /usr/share/nginx/thebideo/mp3 assets/
+popd 
 popd
