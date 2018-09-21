@@ -23,9 +23,10 @@ node {
                         '/9fstn3/Bideo23.mp3','/2gkji7/whateverbideo.mp3']
     
         for( item in mp3_URLs ) {
+            def mp3 = item
             downloads[item] = {
                 node {
-                    sh "wget -nc -P /usr/share/nginx/thebideo/mp3/ ${base_mp3_url}${item}"
+                    sh "wget -nc -P /usr/share/nginx/thebideo/mp3/ ${base_mp3_url}${mp3}"
                 }
             }
         }
