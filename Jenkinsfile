@@ -45,6 +45,6 @@ node {
     }
 
     stage('Cleanup') {
-        cleanWs()
+        //cleanWs()
     }
 }
