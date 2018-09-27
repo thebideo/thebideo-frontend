@@ -9,6 +9,6 @@ fi
 pushd ..
 bundle install
 pushd assets
-cp -rf /usr/share/nginx/thebideo/* .
+cp -rfv /usr/share/nginx/thebideo/* .
 popd 
 popd
