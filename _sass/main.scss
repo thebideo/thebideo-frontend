@@ -36,25 +36,25 @@ header {
     height: $navMaxHeight + 2.25rem;
 }
 
-.site-logo {
-    max-height: $navMaxHeight + 1.75rem;
-    padding: 0.25rem;
-    margin: 0.25rem;
-    #header-logo {
-        width: 100%;
-        max-height: $navMaxHeight;
+#navbar {
+    background-color: whitesmoke;
+    .logo {
+        display: block;
+        float: left;
+        max-height: $navMaxHeight + 1.75rem;
+        padding: 0.25rem;
+        margin-left: 0.5rem;
         object-fit: contain;
         -o-object-fit: contain;
         position: relative;
         top: 50%;
         transform: translateY(-50%);
         -ms-transform: translateY(-50%);
+        img {
+            max-height: $navMaxHeight;
+        }
     }
-}
-
-#navbar {
-    background-color: whitesmoke;
-    a {
+    a:not(:first-child) {
         float: left;
         display: block;
         width: auto;
@@ -65,7 +65,7 @@ header {
         padding: 1rem;
         top: 50%;
     }
-    a:hover {
+    a:hover:not(:first-child) {
         background-color: #B0779C;
         color: white;
     }
@@ -171,12 +171,19 @@ footer {
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 576px) {
     #navbar {
-        a {
+        a:not(:first-child) {
             display: none;
         }
         a.icon {
             display: block;
             float: right;
+        }
+    }
+}
+@media screen and (min-width: 576px) {
+    #navbar {
+        a.icon {
+            display: none;
         }
     }
 }
@@ -192,7 +199,7 @@ footer {
         position: relative;
         z-index: 9999;
     }
-    #navbar.responsive a {
+    #navbar.responsive a:not(:first-child) {
         float: none;
         display: block;
         text-align: right;
@@ -202,6 +209,14 @@ footer {
         top: 0%;
         transform: translateY(0%);
         -ms-transform: translateY(0%);
+    }
+    #navbar.responsive a.logo {
+        float: left;
+        margin-top: 0.75rem;
+        top: 0%;
+        transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        z-index: 99999;
     }
 }
 
