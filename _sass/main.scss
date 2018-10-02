@@ -48,6 +48,8 @@ html {
 
 #navbar {
     background-color: whitesmoke;
+    position: fixed;
+    width: 100%;
     .logo {
         display: block;
         float: left;
@@ -95,6 +97,7 @@ html {
 .jumbotron {
     padding: 1rem;
     background-color: #B0779C;
+    margin-top: $navMaxHeight;
 }
 
 #logo {
@@ -194,12 +197,11 @@ footer {
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
 @media screen and (max-width: $smScreen) {
     #navbar {
-        float: right;
         overflow: visible;
         z-index: 9999;
     }
     #navbar.responsive {
-        position: relative;
+        position: fixed;
         z-index: 9999;
     }
     #navbar.responsive a:not(:nth-last-child(n+5)) {
