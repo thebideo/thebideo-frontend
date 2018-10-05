@@ -1,5 +1,20 @@
 $numColumns: 12;
-$gutterWidth: 15px;
+$gutterWidth: 0.5rem;
+$navMaxHeight: 4.5rem;
+
+$xsScreen: 0px;
+$smScreen: 600px;
+$mdScreen: 768px;
+$lgScreen: 992px;
+$xlScreen: 1200px;
+
+@mixin transform($percent) {
+    position: relative;
+    top: $percent;
+    -webkit-transform: translateY(-$percent);
+    -ms-transform: translateY(-$percent);
+    transform: translateY(-$percent);
+}
 
 * {
     box-sizing: border-box;
@@ -31,79 +46,189 @@ html {
     grid-column-end: span $numColumns; //Full width fallback when no column size is define for the screen size.
 }
 
-.site-logo {
-    display: inline-block;
-    padding: 0.25rem;
-    margin: 0.25rem;
-}
-
-#header-logo {
+#navbar {
+    background-color: whitesmoke;
+    position: fixed;
     width: 100%;
-    max-width: 175px;
-}
-
-.navbar {
-    grid-column-start: auto;
-    width: 100%;
-    height: 100%;
-
-    td {
-        width: auto;
+    .logo {
+        display: block;
+        float: left;
+        width: 20%;
+        padding: 0.25rem;
+        object-fit: contain;
+        -o-object-fit: contain;
+        img {
+            @include transform(50%);
+            max-height: $navMaxHeight - 1rem;
+            max-width: 100%;
+        }
+    }
+    a {
+        height: $navMaxHeight;
+    }
+    a:not(:first-child) {
+        display: block;
+        float: left;
+        width: 20%;
         color: black;
         font-family: Arial, Helvetica, sans-serif;
+        font-size: 1rem;
         text-align: center;
-        vertical-align: bottom;
-        padding: 1rem;
+        p {
+            @include transform(50%);
+        }
+    }
+    a:hover:not(:nth-last-child(n+5)) {
+        background-color: #B0779C;
+        color: white;
+    }
+    .icon {
+        display: none;
+        position: relative;
+        img {
+            @include transform(50%);
+            max-height: $navMaxHeight - 1rem;
+            object-fit: contain;
+            -o-object-fit: contain;
+        }
     }
 }
 
 .jumbotron {
     padding: 1rem;
-    background-color: rgb(0, 0, 0);
+    background-color: #B0779C;
+    margin-top: $navMaxHeight;
 }
 
-#oldlogo {
+#logo {
+    @include transform(50%);
+    border-radius: 0.5rem;
     width: 100%;
 }
 
 .jumbotron-info {
-    border: 1px solid green;
     display: block;
     color: aliceblue;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+
+    div {
+        @include transform(50%);
+    }
 }
 
 #mainsound {
-    margin: 1rem;
+    margin: 2rem;
     vertical-align: bottom;
 }
 
+.twitter {
+    background-color: blue;
+    height: 100%;
+    display: none;
+}
+
+.reviews {
+    padding-top: 1rem;
+}
 .content {
     padding: 1rem;
     background-color: rgb(107, 1, 107);
-    overflow: auto;
+
+    h3 {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 2rem;
+        color: white;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: white;
+    }
 }
 
-.left {
-    text-align: center;
-    margin: 1rem 0.5rem;
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+
+    iframe, object, embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 }
 
-#youtube {
-    width: 100%;
-    min-height: 315px;
+footer {
+    padding: 1rem;
+    p {
+        text-align: center;
+        width: 300px;
+    }
 }
 
-.right {
-    text-align: center;
-    margin: 1rem 0.5rem;
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: $smScreen) {
+    #navbar {
+        a:not(:first-child) {
+            display: none;
+        }
+        a.icon {
+            display: block;
+            float: right;
+            text-align: right;
+        }
+    }
+}
+@media screen and (min-width: $smScreen) {
+    #navbar {
+        a.icon {
+            display: none;
+        }
+    }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: $smScreen) {
+    #navbar {
+        overflow: visible;
+        z-index: 9999;
+    }
+    #navbar.responsive {
+        position: fixed;
+        z-index: 9999;
+    }
+    #navbar.responsive a:not(:nth-last-child(n+5)) {
+        float: right;
+        display: block;
+        width: 100%;
+        z-index: 9999;
+        text-align: right;
+        padding-right: 1rem;
+    }
+    #navbar.responsive a.icon {
+        display: block;
+        float: right;
+        width: 80%;
+    }
+    #navbar.responsive a.logo {
+        float: left;
+        img {
+            z-index: 99999;
+        }
+    }
 }
 
 // NESTED LOOP
 // Check out the compiled css. It is very repetitive, similar to Bootstrap Grid code
 // Loop through responsive breakpoints
-@each $size, $abbr in (0,xs),(576px,sm),(768px,md),(992px,lg),(1200px,xl){
+@each $size, $abbr in ($xsScreen,xs),($smScreen,sm),($mdScreen,md),($lgScreen,lg),($xlScreen,xl){
     @media (min-width: $size){
       // Loop through col classes
       @for $i from 1 through $numColumns{

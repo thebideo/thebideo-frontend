@@ -11,6 +11,7 @@ node {
     }
 
     stage('Download Files') {
+        /*
         def downloads = [:]
         def base_mp3_url = 'https://bideo.podbean.com/mf/download'
         def mp3_URLs = ['/2gkji7/whateverbideo.mp3','/s3ry7b/The_Bideo_Ep1.mp3','/qv69yf/The_Bideo_Ep2.mp3','/ja6dyu/Bideo_EP3.mp3',
@@ -22,13 +23,15 @@ node {
                         '/9fstn3/Bideo23.mp3','/2gkji7/whateverbideo.mp3']
     
         for( item in mp3_URLs ) {
+            def mp3 = item
             downloads[item] = {
                 node {
-                    sh "wget -P ./assets/mp3/ $base_mp3_url$item"
+                    sh "wget -nc -P /usr/share/nginx/thebideo/mp3/ ${base_mp3_url}${mp3}"
                 }
             }
         }
-        // parallel downloads
+        parallel downloads
+        */
     }
 
     stage('Build') {
@@ -43,9 +46,7 @@ node {
         }
     }
 
-    post { 
-        always { 
-            cleanWs()
-        }
+    stage('Cleanup') {
+        //cleanWs()
     }
 }
